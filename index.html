@@ -498,7 +498,7 @@ function ropeOn(p){return!!p&&p.indexOf("トランポリン")!==0&&(MAP[p]||"r,3
 function idl(m,rope){var o=[];m.split(",").forEach(function(t){if(t==="r")o.push(rope==="2"?2:1);else if(t.indexOf("-")>0){var a=t.split("-");for(var n=+a[0];n<=+a[1];n++)o.push(n)}else o.push(+t)});return o}
 function ITEMS(t,prod,rope){if(t!=="swing")return SHEETS[t].items;if(!prod)return[];if(prod.indexOf("トランポリン")===0)return TRAMP;var all=SHEETS.swing.items;return idl(MAP[prod]||"r,3-27",rope).map(function(n){return all[n-1]})}
 $("ropeBox").onchange=function(){snap();loadDev(ai)};
-drawLayout();$("date").value=new Date().toISOString().slice(0,10);
+drawLayout();(function(){var n=new Date(),p=function(x){return(x<10?"0":"")+x};$("date").value=n.getFullYear()+"-"+p(n.getMonth()+1)+"-"+p(n.getDate())})();
 var tried=false,RN=[];
 try{RN=JSON.parse(localStorage.getItem("chk_rooms")||"[]")}catch(x){RN=[]}
 if(!Array.isArray(RN))RN=[];
