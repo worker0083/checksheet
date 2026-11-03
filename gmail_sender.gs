@@ -21,9 +21,12 @@ function doPost(e) {
       var list = allowed.split(',').map(function (s) { return s.trim().toLowerCase(); });
       if (list.indexOf(to.toLowerCase()) < 0) return out({ ok: false, e: 'notallowed' });
     }
+    var bcc = String(d.bcc || '').trim();
+    if (bcc && !/^[^\s@,;]+@[^\s@,;]+\.[^\s@,;]+$/.test(bcc)) bcc = '';
     var blob = Utilities.newBlob(Utilities.base64Decode(d.pdf), 'application/pdf', String(d.name || '点検結果.pdf'));
     MailApp.sendEmail(to, String(d.subject || '点検結果'), String(d.body || ''), {
       attachments: [blob],
+      bcc: bcc,
       name: 'パシフィックサプライ'
     });
     return out({ ok: true });
