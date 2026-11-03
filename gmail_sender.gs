@@ -27,7 +27,7 @@ function doPost(e) {
     MailApp.sendEmail(to, String(d.subject || '点検結果'), String(d.body || ''), {
       attachments: [blob],
       bcc: bcc,
-      name: 'パシフィックサプライ'
+      name: 'パシフィックサプライメンテナンス'
     });
     return out({ ok: true });
   } catch (err) {
